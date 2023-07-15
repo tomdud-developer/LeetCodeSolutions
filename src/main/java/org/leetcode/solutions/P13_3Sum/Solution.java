@@ -28,8 +28,26 @@ class Solution {
 
     public static List<List<Integer>> threeSum(int[] nums) {
 
+        Arrays.sort(nums);
+        Set<List<Integer>> listSet = new HashSet<>();
 
-        return null;
+        for (int i = 0; i < nums.length; i++) {
+            int left = i+1;
+            int right = nums.length-1;
+
+            while(left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum < 0) left++;
+                else if (sum > 0) right--;
+                else {
+                    listSet.add(new ArrayList<>(List.of(nums[i], nums[left], nums[right])));
+                    left++;
+                    right--;
+                }
+            }
+        }
+
+        return new ArrayList<>(listSet);
     }
 
     //Time Limit Exceeded
